@@ -47,13 +47,20 @@ jobs:
       - name: Set repo name only
         run: echo "REPO_NAME_LC=$(echo $REPO_NAME | tr '[:upper:]' '[:lower:]')" >> $GITHUB_ENV
 
+      - name: Display Environment Variables
+        run: |
+          echo "ORG_LC: ${{ env.ORG_LC }}"
+          echo "IMAGE_TAG: ${{ env.IMAGE_TAG }}"
+          echo "REPO_NAME_LC: ${{ env.REPO_NAME_LC }}"
+          echo "GITHUB_REPOSITORY: ${{ github.repository }}"
+
       - name: Build Docker image
         run: |
-          docker build -t ghcr.io/${{ env.ORG_LC }}/${{ env.REPO_NAME_LC }}:${{ env.IMAGE_TAG }}-latest-dev .
+          docker build -t ghcr.io/${{ env.ORG_LC }}/grpc_test_app:${{ env.IMAGE_TAG }}-latest-dev .
 
       - name: Log in to GitHub Container Registry
         run: echo "${{ secrets.GITHUB_TOKEN }}" | docker login ghcr.io -u ${{ github.actor }} --password-stdin
 
       - name: Push Docker image
         run: |
-          docker push ghcr.io/${{ env.ORG_LC }}/${{ env.REPO_NAME_LC }}:${{ env.IMAGE_TAG }}-latest-dev
+          docker push ghcr.io/${{ env.ORG_LC }}/grpc_test_app:${{ env.IMAGE_TAG }}-latest-dev
