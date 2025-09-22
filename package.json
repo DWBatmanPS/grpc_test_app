@@ -1,0 +1,18 @@
+{
+  "name": "grpc_test_app",
+  "version": "1.0.0",
+  "description": "A GRPC test application written in NodeJS",
+  "main": "src/index.js",
+  "scripts": {
+    "test": "node src/index.js"
+  },
+  "keywords": [
+    "grpc"
+  ],
+  "author": "GDBatmanPS",
+  "license": "ISC",
+  "dependencies": {
+    "@grpc/grpc-js": "^1.14.0",
+    "@grpc/proto-loader": "^0.8.0"
+  }
+}
